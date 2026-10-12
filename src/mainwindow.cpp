@@ -9,6 +9,12 @@
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QHeaderView>
+#include <QHBoxLayout>
+#include <QAbstractItemView>
+#include <QPushButton>
+#include <QTableWidgetItem>
+#include <QFont>
+#include <QKeySequence>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMenuBar>
@@ -117,7 +123,6 @@ void MainWindow::createVirtualMachine()
     cpus->setRange(1, 64);
     cpus->setValue(2);
     auto *iso = new QLineEdit(&dialog);
-    auto *browse = new QAction("Browse...", &dialog);
     auto *isoRow = new QWidget(&dialog);
     auto *isoLayout = new QHBoxLayout(isoRow);
     isoLayout->setContentsMargins(0, 0, 0, 0);
