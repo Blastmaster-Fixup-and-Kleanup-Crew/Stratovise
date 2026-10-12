@@ -4,13 +4,13 @@ Stratovise is an independent Windows desktop virtualization manager inspired by 
 
 ## Platform and stack
 
-- Host: Windows 10/11 x64
+- Host: Windows 10/11 x64 (first-class compatibility target) and Linux x86-64
 - Language: C++20
-- UI: Qt 6 Widgets, using a classic menu bar, toolbars, dialogs, and VM inventory
+- UI: Qt 6 Widgets, using a classic menu bar, toolbars, dialogs, and VM inventory on both platforms
 - Build: CMake
-- Initial virtualization backend: QEMU for Windows, integrated through a dedicated backend layer
+- Virtualization backend: QEMU, integrated through a dedicated backend layer; QEMU executable discovery is platform-aware
 
-Stratovise is a Windows-hosted application intended to run guest operating systems such as Windows and Linux, subject to their requirements and licenses.
+Stratovise is intended to run on Windows and Linux hosts and host guest operating systems such as Windows and Linux, subject to their requirements and licenses.
 
 ## Goals
 
@@ -29,24 +29,29 @@ Stratovise is a Windows-hosted application intended to run guest operating syste
 5. Virtual disk, ISO, and networking workflows.
 6. Windows packaging, dependency checks, and clean-install validation.
 
-## Windows development prerequisites
+## Development prerequisites
 
-- Windows 10/11 x64
+- Windows 10/11 x64 or Linux x86-64
 - CMake
-- A C++20 compiler toolchain
+- A C++20 compiler toolchain (MSVC or MinGW on Windows; GCC or Clang on Linux)
 - Qt 6 Widgets development package
-- QEMU for Windows
+- QEMU for the host platform
 
-## Intended build workflow
+## Build
 
-Once the CMake project and source files are implemented:
+Windows (PowerShell):
 
 ```powershell
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
-These are planned commands; a working build is not yet available at project initialization.
+Linux:
+
+```sh
+cmake -S . -B build
+cmake --build build -j
+```
 
 ## Licensing
 
@@ -54,4 +59,4 @@ Stratovise is an independent implementation inspired by historical workstation v
 
 ## Status
 
-Project initialization. The repository does not yet contain a runnable application.
+Initial Qt shell and QEMU detection are implemented. The current New VM dialog adds an in-memory draft only. Persistent machine definitions, virtual disk creation, and VM launch/lifecycle controls remain future milestones. No successful compile or runtime test is claimed yet.
