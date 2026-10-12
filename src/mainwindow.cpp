@@ -211,7 +211,8 @@ void MainWindow::createVirtualMachine()
     machine.insert("guestOs", guest->text().trimmed().isEmpty() ? "Other" : guest->text().trimmed());
     machine.insert("memoryMb", memory->value());
     machine.insert("cpus", cpus->value());
-    machine.insert("isoPath", QDir::cleanPath(iso->text().trimmed()));
+    const QString isoText = iso->text().trimmed();
+    machine.insert("isoPath", isoText.isEmpty() ? QString() : QDir::cleanPath(isoText));
     machines_.append(machine);
     if (!saveVirtualMachines()) {
         machines_.removeLast();
