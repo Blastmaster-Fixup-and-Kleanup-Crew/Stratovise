@@ -14,16 +14,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            qt-arch: win64_msvc2022_64
+          - os: ubuntu-latest
+            qt-arch: gcc_64
 
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
       - name: Install Qt
-        uses: jurplel/setup-qt@v4
+        uses: jurplel/install-qt-action@v4
         with:
           version: '6.8.3'
+          host: ${{ runner.os == 'Windows' && 'windows' || 'linux' }}
+          target: 'desktop'
+          arch: ${{ matrix.qt-arch }}
           modules: 'qtbase'
 
       - name: Configure
